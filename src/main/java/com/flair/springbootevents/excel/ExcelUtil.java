@@ -2,6 +2,7 @@ package com.flair.springbootevents.excel;
 
 import com.flair.springbootevents.Entity.Person;
 import com.flair.springbootevents.util.StringUtil;
+import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.slf4j.Logger;
@@ -26,9 +27,18 @@ public class ExcelUtil {
     //解析导入的excel文件  可封装一个实体类用于接收Excel导入
     public static String parseDeviceGroupInfo(List<Person> list , MultipartFile file, String fileName) {
         InputStream in = null;
+        Boolean isExcel2003=true;
+        if( WDWUtil.isExcel2007( fileName ) ){
+            isExcel2003 = false;
+        }
         try {
             in = file.getInputStream();
-            Workbook workbook  = new XSSFWorkbook( in );
+            Workbook workbook = null;
+            if( isExcel2003 ){
+                workbook = new HSSFWorkbook( in );
+            }else {
+                workbook = new XSSFWorkbook( in );
+            }
             Sheet sheet = workbook.getSheetAt( 0 );
             Integer max = 200;
             max = ( max == null ? DEFAULT_MAX_GROUP_LINE : max );
