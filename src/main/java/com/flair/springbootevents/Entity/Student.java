@@ -1,7 +1,12 @@
 package com.flair.springbootevents.Entity;
 
+import com.flair.springbootevents.annotation.SortField;
+
 public class Student {
+
+    @SortField
     private String name;
+    @SortField
     private Integer age;
     private String home;
     private String address;
