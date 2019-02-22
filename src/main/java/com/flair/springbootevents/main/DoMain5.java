@@ -16,11 +16,13 @@ public class DoMain5 {
                 field.setAccessible(true);
                 Field declaredField = teacher.getClass().getDeclaredField(name);
                 declaredField.setAccessible(true);
-//                if(declaredField.getType().isInstance(Byte.class)){
-//
-//                }
                 Object o = field.get(person);
-                declaredField.set(teacher,o);
+                if(name.equals("address")){
+                    declaredField.set(teacher,o.toString().getBytes());
+                }else {
+                    declaredField.set(teacher,o);
+                }
+
             }
             } catch (NoSuchFieldException e) {
                 e.printStackTrace();
