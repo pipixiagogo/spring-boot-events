@@ -10,8 +10,8 @@ public class Person {
     @ExcelExportConfig(name="姓名")
     private String name;
     @ExcelExportConfig(name = "年龄")
-    public Integer age;
-    String address;
+    private Integer age;
+    private String address;
     private String home;
    // private Boolean isBoos;
 
@@ -26,7 +26,7 @@ public class Person {
         //this.isBoos = isBoos;
     }
 
-    private String getName() {
+    public String getName() {
         return name;
     }
 
